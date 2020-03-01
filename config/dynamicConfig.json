@@ -1,0 +1,37 @@
+{
+
+    "mailerModule" : {
+
+        "defaultHandler" : "email",
+
+        "handlerList" : [
+
+            {
+                "type" : "email",
+                "handlerConfig" : {
+
+                    "from" : "abc@abc.com",
+                    "something" : "something"
+                }
+            },
+
+            {
+                "type" : "whatsapp",
+                "handlerConfig" : {
+
+                    "from" : "adsfdsa",
+                    "som" : "some"
+                }
+
+
+            }
+        ]
+    } 
+
+
+    
+
+
+
+
+}

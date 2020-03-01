@@ -2,6 +2,11 @@
 /dist
 /node_modules
 
+# all .env files except .sample.env
+/env/*
+!/env/sample.env
+!/env/sample.dynamicConfig.json
+
 # Logs
 logs
 *.log
