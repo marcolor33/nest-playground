@@ -5,9 +5,13 @@ export interface MomentConfig {
     config: any
 }
 
-const defaultMomentConfig = {} as MomentConfig
+const defaultMomentConfig = {
+} as MomentConfig
 
-export default class MomentHelper {
+
+const defaultDateTimeFormat = moment.ISO_8601
+
+export class MomentHelper {
     dateTimeFormat: string
 
     timeZone: string
@@ -17,36 +21,29 @@ export default class MomentHelper {
 
     constructor(
         language = 'en',
-        config: moment.LocaleSpecification,
-        datetimeFormat = 'YYYY-MM-DD HH:mm:ss'
+        config: moment.LocaleSpecification = defaultMomentConfig,
+        datetimeFormat:string  = defaultDateTimeFormat
     ) {
         // todo : save all stuff
-        this.momentInstance = moment.updateLocale(language, config)
-
-        const dumb = [
-            {
-                dumb: '',
-            },
-        ]
-
-        const dumb2 = []
-        const dum3 = {}
+        // this.momentInstance = moment.updateLocale(language, config)
     }
 
-    toString(dateTimeFormat?: string) {
+    // using ISO 8601
+
+    toString(dateTimeFormat: string = defaultDateTimeFormat) {
         return moment()
             .tz(this.timeZone)
             .format(dateTimeFormat || this.dateTimeFormat)
     }
 
-    parseString(datetimeString: string, dateTimeFormat?: string) {
+    parseString(datetimeString: string, dateTimeFormat: string = defaultDateTimeFormat) {
         return moment(datetimeString)
             .tz(this.timeZone)
             .format(dateTimeFormat || this.dateTimeFormat)
     }
 
-    dumb() {
-        const instance = moment()
+    getInstance(input?:any) {
+        const instance = moment(input)
         return instance
     }
 }
