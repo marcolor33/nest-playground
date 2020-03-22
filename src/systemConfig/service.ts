@@ -5,6 +5,7 @@ import { DynamicConfig } from 'interface/dynamicConfig'
 import path = require('path')
 import { MyLogger } from 'logger/service'
 
+
 @Injectable()
 export class SystemConfigService {
     constructor(
@@ -20,10 +21,6 @@ export class SystemConfigService {
     }
 
     async getDynamicCofig(): Promise<DynamicConfig> {
-
-        // this.mylogger.log('getting config')
-
-        console.log('get config')
 
         const filePath = path.resolve('config', 'dynamicConfig.json')
         const dumb = await readFileSync(filePath, 'utf-8')

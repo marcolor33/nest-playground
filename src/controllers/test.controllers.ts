@@ -1,12 +1,14 @@
 import { Controller, Get, HttpService, NotImplementedException } from '@nestjs/common'
 import { UserService } from 'service/user/service'
 import { SystemConfigService } from 'systemConfig/service'
-import { promises } from 'dns'
 import { MyLogger } from 'logger/service'
 import moment = require('moment')
 import { OutboundService } from 'outbound/service'
 import { AxiosRequestConfig } from 'axios'
-import { LoggerModule } from 'logger'
+
+import { dynamicRun } from 'utils/tsCompiler'
+import path = require('path')
+import { readFileSync } from 'fs'
 
 @Controller('test')
 export class TestController {
@@ -22,11 +24,30 @@ export class TestController {
     }
 
 
+    @Get('compile')
+    async compile() {
+
+        const filePath = 'external/test.ts'
+        const resolveFilePath = path.resolve(filePath)
+
+        const fileContent = readFileSync(resolveFilePath).toString()
+        
+
+        const { dynamicTest } = await dynamicRun(fileContent)
+
+        console.log(dynamicTest)
+
+        const result = await dynamicTest()
+
+        console.log(result)
+
+
+        return 'ads'
+    }
+
+
     @Get('outbound')
     async testOutbound() {
-
-
-
 
         const config = {
             url : 'http://localhost:3000/test/cats',
@@ -45,7 +66,7 @@ export class TestController {
 
     @Get('test')
     async getHello() {
-
+        
         const result = await Promise.allSettled([
 
             this.systemConfigService.getDynamicCofig(),
