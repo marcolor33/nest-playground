@@ -1,4 +1,4 @@
-import { HttpInstance } from './http'
+import { HttpInstance } from 'utils/http'
 import { AxiosRequestConfig } from 'axios'
 
 

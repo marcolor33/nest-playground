@@ -1,6 +1,6 @@
 import * as moment from 'moment-timezone'
 
-export interface MomentConfig {
+interface MomentConfig {
     timeZone: string
     config: any
 }
@@ -11,7 +11,7 @@ const defaultMomentConfig = {
 
 const defaultDateTimeFormat = moment.ISO_8601
 
-export class MomentHelper {
+class MomentHelper {
     dateTimeFormat: string
 
     timeZone: string
@@ -46,4 +46,14 @@ export class MomentHelper {
         const instance = moment(input)
         return instance
     }
+}
+
+
+
+
+export {
+    MomentConfig,
+    defaultMomentConfig,
+    defaultDateTimeFormat,
+    MomentHelper
 }

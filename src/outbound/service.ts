@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import Axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import { MyLogger } from 'logger/service'
 
 
-import { HttpInstance, HttpError, HttpResponse } from 'utils/http'
+import { HttpInstance, HttpError, HttpResponse,AxiosRequestConfig } from 'utils/http'
 
 
 @Injectable()
