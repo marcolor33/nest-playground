@@ -1,5 +1,4 @@
-// the root is not in src/utils/tsCompiler
-import { HttpInstance } from './http'
+import { HttpInstance } from 'utils/http'
 import { AxiosRequestConfig } from 'axios'
 
 
@@ -17,5 +16,7 @@ async function dynamicTest() {
 }
 
 
-export default {dynamicTest}
+export default {
+    dynamicTest
+}
 

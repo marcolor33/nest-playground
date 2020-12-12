@@ -22,6 +22,10 @@ module.exports = {
     node: true,
     jest: true,
   },
+
+  // don't lint files in external
+  "ignorePatterns": ["**/external/**/*.ts"],
+
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

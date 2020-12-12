@@ -1,16 +1,24 @@
 
 import * as mime from 'mime-types'
 
-// this part should only contain the FileData, information like fileName,filePath should not be here
-interface FileData {
+
+interface BaseFileData {
 
     mimeType: string
     extension: string
 
+}
+
+interface FileBufferData extends BaseFileData{
+    buffer : Buffer
+}
+
+// this part should only contain the FileData, information like fileName,filePath should not be here
+interface FileData extends BaseFileData{
+
     // warning : this part should not contain the header/mimeType
     dataString: string
-    encoding : BufferEncoding
-
+    encoding : BufferEncoding // mark down how it encoded
 }
 
 interface File {
@@ -20,15 +28,13 @@ interface File {
 
 interface FileWithPathInfo extends File {
     fullPath : string
-
     fileName : string
-    extension : string
-    
 
 }
 
 
-async function bufferToFileData(buffer : Buffer,extension : string,encoding = 'base64') {
+
+function bufferToFileData(buffer : Buffer,extension : string,encoding = 'base64') {
 
     const dataString = buffer.toString(encoding)
     const mimeType = mime.types[extension]
@@ -42,14 +48,31 @@ async function bufferToFileData(buffer : Buffer,extension : string,encoding = 'b
 
 }
 
-async function fileDataToBuffer(fileData : FileData) {
+function fileDataToBuffer(fileData : FileData) {
 
     const buffer =  Buffer.from(fileData.dataString,fileData.encoding)
     return buffer
 
 }
 
-async function base64StringToFileData(base64String : string,encoding = 'base64') {
+function fileDataToFileBufferData(fileData : FileData) : FileBufferData {
+
+    const { mimeType, extension } = fileData
+    const buffer = fileDataToBuffer(fileData)
+
+    const result = {
+        mimeType,
+        extension,
+        buffer 
+    } as FileBufferData
+
+    return result
+
+}
+
+
+
+function base64StringToFileData(base64String : string,encoding = 'base64') {
 
     const base64Header = base64String.split(';')[0].split('data:')[1]
     const base64DataString = base64String.split(',')[1]
@@ -60,14 +83,25 @@ async function base64StringToFileData(base64String : string,encoding = 'base64')
     return bufferToFileData(buffer,extension,encoding)
 }
 
-async function getMime() {
-    return mime.lookup()
+
+// get mimeType, will return undefined
+function extensionToMimeType(extension: string) {
+    return mime.lookup(extension)
+}
+
+// get extension, will return undefined
+function mimeTypeToExtension(mimeType: string) {
+    return mime.extension(mimeType)
 }
 
 
 export {
     FileData,
-    File
+    File,
+    FileWithPathInfo,
+    extensionToMimeType,
+    mimeTypeToExtension,
+    
 }
 
 

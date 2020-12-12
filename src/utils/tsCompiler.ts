@@ -4,25 +4,27 @@ import * as ts from 'typescript'
 
 async function compile(codeString : string, transpileOptions : ts.TranspileOptions) {
 
-    transpileOptions = {
-        compilerOptions: {
-            module: ts.ModuleKind.CommonJS,
-            declaration: true,
-            removeComments: true,
-            emitDecoratorMetadata: true,
-            experimentalDecorators: true,
-            target: ts.ScriptTarget.ES2020,
-            sourceMap: true,
-            baseUrl: '../../src',
-            incremental: true,
-            sourceRoot : '../'
-        } as ts.CompilerOptions,
-        exclude: [
-            'node_modules', 
-            'dist',
-            'external'
-        ]
-    } as ts.TranspileOptions
+    const externalRoot = 'C:\\Users\\Marco\\project\\nest-playground\\dist'
+
+    // transpileOptions = {
+    //     compilerOptions: {
+    //         module: ts.ModuleKind.CommonJS,
+    //         declaration: true,
+    //         removeComments: true,
+    //         emitDecoratorMetadata: true,
+    //         experimentalDecorators: true,
+    //         target: ts.ScriptTarget.ES2020,
+    //         sourceMap: true,
+    //         baseUrl: externalRoot,
+    //         incremental: true,
+    //         sourceRoot : externalRoot
+    //     } as ts.CompilerOptions,
+    //     exclude: [
+    //         'node_modules', 
+    //         'dist',
+    //         'external'
+    //     ]
+    // } as ts.TranspileOptions
       
 
     // const result = ts.transpileModule(codeString, {
@@ -44,8 +46,16 @@ async function dynamicRun(codeString : string) {
     const transpileOptions = {
         compilerOptions: {
             module: ts.ModuleKind.CommonJS,
+            target: ts.ScriptTarget.ES2020,
+            baseUrl: externalRoot,
+            paths : {
+                '*': ['*', 'dist/*']
+            }
         } as ts.CompilerOptions
     } as ts.TranspileOptions
+
+
+
 
 
     const jsCodeString = await compile(codeString,transpileOptions)

@@ -84,6 +84,10 @@ class HttpInstance {
 
 
 export {
+    AxiosRequestConfig,
+    AxiosInstance,
+    AxiosError,
+    AxiosResponse,
     HttpInstance,
     HttpResponse,
     HttpError
