@@ -2,7 +2,7 @@ import path = require('path')
 import * as ts from 'typescript'
 
 
-export async function compile(codeString : string, transpileOptions : ts.TranspileOptions) {
+async function compile(codeString : string, transpileOptions : ts.TranspileOptions) {
 
     transpileOptions = {
         compilerOptions: {
@@ -39,7 +39,7 @@ export async function compile(codeString : string, transpileOptions : ts.Transpi
     return result.outputText
 }
 
-export async function dynamicRun(codeString : string) {
+async function dynamicRun(codeString : string) {
 
     const transpileOptions = {
         compilerOptions: {
@@ -52,4 +52,9 @@ export async function dynamicRun(codeString : string) {
     const resultModule = eval(jsCodeString)
     return resultModule
 
+}
+
+export {
+    compile,
+    dynamicRun
 }

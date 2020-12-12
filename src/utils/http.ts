@@ -24,7 +24,7 @@ interface HttpError<T> extends HttpResponse<T> {
 }
 
 
-export default class HttpInstance {
+class HttpInstance {
 
     private axiosInstance: AxiosInstance
 

@@ -7,6 +7,8 @@ import { OutboundService } from 'outbound/service'
 import { AxiosRequestConfig } from 'axios'
 
 import { dynamicRun } from 'utils/tsCompiler'
+
+import { test } from 'utils/date'
 import path = require('path')
 import { readFileSync } from 'fs'
 
@@ -67,27 +69,27 @@ export class TestController {
     @Get('test')
     async getHello() {
         
-        const result = await Promise.allSettled([
+        // const result = await Promise.allSettled([
 
-            this.systemConfigService.getDynamicCofig(),
-            this.systemConfigService.getDynamicCofig()
+        //     this.systemConfigService.getDynamicCofig(),
+        //     this.systemConfigService.getDynamicCofig()
 
-        ])
+        // ])
 
-        console.log(result)
+        // console.log(result)
 
-        const dumb = await this.systemConfigService.getDynamicCofig()
+        // const dumb = await this.systemConfigService.getDynamicCofig()
 
-        const time1 = '2020-03-04T19:32:04.952+08:00'
-        const time2 = '2020-03-04T11:32:04.952Z'
+        // const time1 = '2020-03-04T19:32:04.952+08:00'
+        // const time2 = '2020-03-04T11:32:04.952Z'
 
-        console.log(moment(time1).format())
-        console.log(moment(time2).format())
+        // console.log(moment(time1).format())
+        // console.log(moment(time2).format())
 
 
-        throw new Error('something worng')
+        // throw new Error('something worng')
 
-        return 'test'
+        return test()
     }
 
 
